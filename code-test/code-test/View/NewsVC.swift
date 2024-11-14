@@ -32,6 +32,7 @@ class NewsVC: UIViewController {
     }
 
     private func setupViews() {
+        view.backgroundColor = .white
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

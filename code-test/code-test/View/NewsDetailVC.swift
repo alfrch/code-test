@@ -21,6 +21,11 @@ class NewsDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+    }
+    
+    private func setupViews() {
+        view.backgroundColor = .white
     }
 }
 
