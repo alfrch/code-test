@@ -18,6 +18,7 @@ class NewsVC: UIViewController {
         tb.rowHeight = UITableView.automaticDimension
         tb.estimatedRowHeight = 44
         tb.translatesAutoresizingMaskIntoConstraints = false
+        tb.register(NewsCell.self, forCellReuseIdentifier: "NewsCell")
         return tb
     }()
     
@@ -57,21 +58,26 @@ class NewsVC: UIViewController {
 // MARK: - UITableViewDelegate
 
 extension NewsVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newsItem = viewModel.item(at: indexPath.row)
+        let detailVC = NewsDetailVC(newsItem: newsItem)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "cell \(indexPath.row)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as? NewsCell else {
+            return UITableViewCell()
+        }
+        let newsItem = viewModel.item(at: indexPath.row)
+        cell.configure(with: newsItem)
         return cell
     }
-    
-    
 }
