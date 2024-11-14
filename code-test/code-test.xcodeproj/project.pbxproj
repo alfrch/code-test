@@ -60,12 +60,11 @@
 		7F48B9322CE592CB00C7678B /* code-test */ = {
 			isa = PBXGroup;
 			children = (
+				7F48B9492CE5946100C7678B /* Model */,
 				7F48B94B2CE5946F00C7678B /* View */,
 				7F48B94A2CE5946800C7678B /* ViewModel */,
-				7F48B9492CE5946100C7678B /* Model */,
 				7F48B9332CE592CB00C7678B /* AppDelegate.swift */,
 				7F48B9352CE592CB00C7678B /* SceneDelegate.swift */,
-				7F48B9372CE592CB00C7678B /* NewsVC.swift */,
 				7F48B9392CE592CB00C7678B /* Main.storyboard */,
 				7F48B93C2CE592CC00C7678B /* Assets.xcassets */,
 				7F48B93E2CE592CC00C7678B /* LaunchScreen.storyboard */,
@@ -93,6 +92,7 @@
 		7F48B94B2CE5946F00C7678B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7F48B9372CE592CB00C7678B /* NewsVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
