@@ -1,12 +1,12 @@
 //
-//  ViewController.swift
+//  NewsVC.swift
 //  code-test
 //
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class NewsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
