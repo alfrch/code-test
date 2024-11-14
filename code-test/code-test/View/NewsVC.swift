@@ -20,10 +20,14 @@ class NewsVC: UIViewController {
         tb.translatesAutoresizingMaskIntoConstraints = false
         return tb
     }()
+    
+    private let viewModel = NewsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        bindViewModel()
+        viewModel.fetchNews()
     }
 
     private func setupViews() {
@@ -34,6 +38,19 @@ class NewsVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func bindViewModel() {
+        viewModel.onFetchNews = { [weak self] errorMessage in
+            guard let errorMessage = errorMessage else {
+                self?.tableView.reloadData()
+                return
+            }
+            
+            let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self?.present(alert, animated: true)
+        }
     }
 }
 
