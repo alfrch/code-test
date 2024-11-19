@@ -32,6 +32,7 @@ class NewsVC: UIViewController {
     }
 
     private func setupViews() {
+        title = "News"
         view.backgroundColor = .white
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
