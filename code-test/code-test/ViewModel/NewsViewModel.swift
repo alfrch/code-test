@@ -11,33 +11,18 @@ class NewsViewModel {
     var onFetchNews: ((_ error: String?) -> Void)?
     
     func fetchNews() {
-        guard let url = URL(string: "https://jsonplaceholder.org/posts") else {
-            onFetchNews?("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            if let error = error {
-                self?.onFetchNews?(error.localizedDescription)
-                return
-            }
-            
-            guard let data = data else {
-                self?.onFetchNews?("No data received")
-                return
-            }
-            
-            do {
-                let items = try JSONDecoder().decode([NewsItem].self, from: data)
-                self?.newsItems = items
+        NewsService.shared.fetchNews(responseType: [NewsItem].self) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.newsItems = response
                 
                 DispatchQueue.main.async {
                     self?.onFetchNews?(nil)
                 }
-            } catch {
-                self?.onFetchNews?("Failed to decode data")
+            case .failure(let error):
+                self?.onFetchNews?(error.localizedDescription)
             }
-        }.resume()
+        }
     }
     
     func numberOfItems() -> Int {
